@@ -284,6 +284,7 @@ int main()
     std::cout << "podaj x celu oraz y celu \n";
     std::cin >> y1 >> x1;
     
+    x = 19 - x;
     
 
     O[x][y] = 1;
@@ -299,20 +300,19 @@ int main()
         droga(R, tablica, F1, x1, y1, x, y);
     }
     else std::cout << "nie ma dojscia";
-        
     
    
     std::cout << "\n";
     std::cout << "\n";
     
     for (int i = 0; i < 20; i++) {
-        for (int j = 0; j < 20; j++) {
+        /*for (int j = 0; j < 20; j++) {
             std::cout << O[i][j];
         }
         std::cout << " ";
         for (int j = 0; j < 20; j++) {
             std::cout << R[i][j];
-        }
+        }*/
         std::cout << " ";
         for (int j = 0; j < 20; j++) {
             std::cout << tablica[i][j] << " ";
