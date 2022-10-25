@@ -1,6 +1,4 @@
-﻿// droga1.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
-//
-#include <fstream>
+﻿#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -139,10 +137,7 @@ void polaObok(int O[20][20], int Z[20][20],int R[20][20],float F[20][20],int tab
                      F1[tmpX - 1][tmpY] = tmp; // tu też wage
                      R[tmpX - 1][tmpY] = 1;
                  }
-                }
-            
-            
-
+                }                     
         }
         if ((tmpY + 1) < 20 && tablica[tmpX][tmpY + 1] != 5) { // pole górne
             int g = ileDoStartu(tmpX, tmpY, startX, startY, R);
@@ -158,11 +153,7 @@ void polaObok(int O[20][20], int Z[20][20],int R[20][20],float F[20][20],int tab
                     F1[tmpX][tmpY + 1] = tmp; // tu też wage
                     R[tmpX][tmpY + 1] = 2;
                 }
-            }
-            
-            
-            
-
+            }                                 
         }
         if ((tmpX + 1) < 20 && tablica[tmpX + 1][tmpY] != 5) { // pole prawe
             int g = ileDoStartu(tmpX, tmpY, startX, startY, R);
@@ -178,21 +169,12 @@ void polaObok(int O[20][20], int Z[20][20],int R[20][20],float F[20][20],int tab
                     F1[tmpX + 1][tmpY] = tmp; // tu też wage
                     R[tmpX + 1][tmpY] = 3;
                 }
-            }
-             
-            
-        }
-        
-
+            }                      
+        }     
         O[tmpX][tmpY] = 0;
         Z[tmpX][tmpY] = 3;
-        F[tmpX][tmpY] = 0;
-
-
-    
+        F[tmpX][tmpY] = 0;   
 }
-
-
 
 void droga(int R[20][20], int tablica[20][20],float F1[20][20], int celX, int celY, int startX, int startY) {
     tablica[celX][celY] = 3;
@@ -221,45 +203,31 @@ void droga(int R[20][20], int tablica[20][20],float F1[20][20], int celX, int ce
 
 int main()
 {
-
     int tablica[20][20];
     std::ifstream file("grid.txt");
     std::vector<std::string> linia;
     if (file.is_open()) { // otwieramy plik
         std::string line;
         std::vector<int> liniaTmp; // tymczasowa linia do której zapisuje linie z mapy
-
         while (std::getline(file, line)) { // czytanie linia po lini pliku
-
-
-            //  std::cout << line.c_str() << "\n";
             linia.push_back(line.c_str()); // wczucanie lini do vektora stringów
-
         }
         std::cout << "\n";
         int y = 0;
         int x = 0;
         for (int i = 0; i < linia.size(); i++) {
             std::string tmp = linia[i]; // tymczasowa linia ktorej będziemy używać do wyciągania charów
-            //   std::cout << "\n";
             y = 0;
             for (int j = 0; j < tmp.size(); j++) {
                 char a = tmp[j];
                 if (a != ' ') {
                     int ia = a - '0';
                     tablica[x][y] = ia; // ostateczna tablica na której będziemy pracować
-                    //   std::cout << tablica[x][y];
                     y++;
-
                 }
-
             }
-
             x++;
-
         }
-
-
         file.close();
     }
 
@@ -282,16 +250,13 @@ int main()
     std::cout << "podaj x startu oraz y startu \n" ;
     std::cin >> y >> x;
     std::cout << "podaj x celu oraz y celu \n";
-    std::cin >> y1 >> x1;
-    
-    x = 19 - x;
-    
+    std::cin >> y1 >> x1;  
+
+    x = 19 - x;   
 
     O[x][y] = 1;
     F[x][y] = 0.1;
 
-    // std::cout << minX(F, O);
-   //  std::cout << minY(F, O);
     while (O[x1][y1] != 1) {
         polaObok(O, Z, R, F, tablica,F1, x1, y1, x, y);
         if (czyJestDojscie(O) == false) break;
@@ -300,8 +265,7 @@ int main()
         droga(R, tablica, F1, x1, y1, x, y);
     }
     else std::cout << "nie ma dojscia";
-    
-   
+       
     std::cout << "\n";
     std::cout << "\n";
     
@@ -316,19 +280,7 @@ int main()
         std::cout << " ";
         for (int j = 0; j < 20; j++) {
             std::cout << tablica[i][j] << " ";
-        }
-        
+        } 
         std::cout << "\n";
     }
 }
-
-// Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
-// Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
-
-// Porady dotyczące rozpoczynania pracy:
-//   1. Użyj okna Eksploratora rozwiązań, aby dodać pliki i zarządzać nimi
-//   2. Użyj okna programu Team Explorer, aby nawiązać połączenie z kontrolą źródła
-//   3. Użyj okna Dane wyjściowe, aby sprawdzić dane wyjściowe kompilacji i inne komunikaty
-//   4. Użyj okna Lista błędów, aby zobaczyć błędy
-//   5. Wybierz pozycję Projekt > Dodaj nowy element, aby utworzyć nowe pliki kodu, lub wybierz pozycję Projekt > Dodaj istniejący element, aby dodać istniejące pliku kodu do projektu
-//   6. Aby w przyszłości ponownie otworzyć ten projekt, przejdź do pozycji Plik > Otwórz > Projekt i wybierz plik sln
